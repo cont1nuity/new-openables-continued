@@ -70,16 +70,16 @@ NOP.T_SPELL_BY_NAME = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},
   [ 94225] = {{1,PRI_REP},nil,nil}, -- Stolen Celestial Insignia
   [ 94226] = {{1,PRI_REP},nil,nil}, -- Stolen Stolen Klaxxi Insignia
   [ 94227] = {{1,PRI_REP},nil,nil}, -- Stolen Golden Lotus Insignia
-  [104013] = {{1,PRI_REP},nil,nil}, -- Timeless x Armor Cache
-  [102288] = {{1,PRI_REP},nil,nil}, -- Timeless x Leggings
-  [102284] = {{1,PRI_REP},nil,nil}, -- Timeless x Robes
-  [102263] = {{1,PRI_REP},nil,nil}, -- Timeless x Chestpiece
-  [102289] = {{1,PRI_REP},nil,nil}, -- Timeless x Spaulders
-  [102290] = {{1,PRI_REP},nil,nil}, -- Timeless x Belt
-  [102286] = {{1,PRI_REP},nil,nil}, -- Timeless x Gloves
-  [102287] = {{1,PRI_REP},nil,nil}, -- Timeless x Helm
-  [102321] = {{1,PRI_REP},nil,nil}, -- Timeless x Bracers
-  [102285] = {{1,PRI_REP},nil,nil}, -- Timeless x Boots
+  [104013] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Armor Cache
+  [102288] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Leggings
+  [102284] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Robes
+  [102263] = {{1,PRI_REP},nil,nil}, -- Timeless Plate Chestpiece
+  [102289] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Spaulders
+  [102290] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Belt
+  [102286] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Gloves
+  [102287] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Helm
+  [102321] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Bracers
+  [102285] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Boots
   
   --10.0 Profession Knowledge
   [201705] = {{1,PRI_REP},nil,nil}, -- Studying - All knowledge use "Studying"

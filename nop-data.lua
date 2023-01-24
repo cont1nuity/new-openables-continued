@@ -71,6 +71,26 @@ NOP.T_SPELL_BY_NAME = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},
   [ 94226] = {{1,PRI_REP},nil,nil}, -- Stolen Stolen Klaxxi Insignia
   [ 94227] = {{1,PRI_REP},nil,nil}, -- Stolen Golden Lotus Insignia
   [102263] = {{1,PRI_REP},nil,nil}, -- Timeless Plate Chestpiece
+  [102264] = {{1,PRI_REP},nil,nil}, -- Timeless Plate Boots
+  [102265] = {{1,PRI_REP},nil,nil}, -- Timeless Plate Gloves
+  [102266] = {{1,PRI_REP},nil,nil}, -- Timeless Plate Helm
+  [102267] = {{1,PRI_REP},nil,nil}, -- Timeless Plate Leggings
+  [102268] = {{1,PRI_REP},nil,nil}, -- Timeless Plate Spaulders
+  [102269] = {{1,PRI_REP},nil,nil}, -- Timeless Plate Belt
+  [102270] = {{1,PRI_REP},nil,nil}, -- Timeless Mail Chestpiece
+  [102271] = {{1,PRI_REP},nil,nil}, -- Timeless Mail Boots
+  [102272] = {{1,PRI_REP},nil,nil}, -- Timeless Mail Gloves
+  [102273] = {{1,PRI_REP},nil,nil}, -- Timeless Mail Helm
+  [102274] = {{1,PRI_REP},nil,nil}, -- Timeless Mail Leggings
+  [102275] = {{1,PRI_REP},nil,nil}, -- Timeless Mail Spaulders
+  [102276] = {{1,PRI_REP},nil,nil}, -- Timeless Mail Belt
+  [102277] = {{1,PRI_REP},nil,nil}, -- Timeless Leather Chestpiece
+  [102278] = {{1,PRI_REP},nil,nil}, -- Timeless Leather Boots
+  [102279] = {{1,PRI_REP},nil,nil}, -- Timeless Leather Gloves
+  [102280] = {{1,PRI_REP},nil,nil}, -- Timeless Leather Helm
+  [102281] = {{1,PRI_REP},nil,nil}, -- Timeless Leather Leggings
+  [102282] = {{1,PRI_REP},nil,nil}, -- Timeless Leather Spaulders
+  [102283] = {{1,PRI_REP},nil,nil}, -- Timeless Leather Belt
   [102284] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Robes
   [102285] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Boots
   [102286] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Gloves
@@ -78,8 +98,18 @@ NOP.T_SPELL_BY_NAME = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},
   [102288] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Leggings
   [102289] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Spaulders
   [102290] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Belt
+  [102291] = {{1,PRI_REP},nil,nil}, -- Timeless Signet
+  [102318] = {{1,PRI_REP},nil,nil}, -- Timeless Cloak
+  [102320] = {{1,PRI_REP},nil,nil}, -- Timeless Plate Bracers
   [102321] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Bracers
+  [102322] = {{1,PRI_REP},nil,nil}, -- Timeless Leather Bracers
+  [102323] = {{1,PRI_REP},nil,nil}, -- Timeless Mail Bracers
+  [104009] = {{1,PRI_REP},nil,nil}, -- Timeless Plate Armor Cache
+  [104010] = {{1,PRI_REP},nil,nil}, -- Timeless Mail Armor Cache
+  [104012] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Armor Cache
   [104013] = {{1,PRI_REP},nil,nil}, -- Timeless Cloth Armor Cache
+  [104345] = {{1,PRI_REP},nil,nil}, -- Timeless Lavalliere
+  [104347] = {{1,PRI_REP},nil,nil}, -- Timeless Curio
   
   --10.0 Profession Knowledge
   [201705] = {{1,PRI_REP},nil,nil}, -- Studying - All knowledge use "Studying"

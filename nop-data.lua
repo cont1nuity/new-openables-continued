@@ -85,6 +85,11 @@ NOP.T_SPELL_BY_NAME = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},
   [104345] = {{1,PRI_REP},nil,nil}, -- Timeless Lavalliere
   [104347] = {{1,PRI_REP},nil,nil}, -- Timeless Curio
   
+  --10.0 Rep
+  [202091] = {{1,PRI_OPEN},nil,nil}, -- Dragonscale Expedition Insignia
+  [202092] = {{1,PRI_OPEN},nil,nil}, -- Iskaara Tuskarr Insignia
+  [202093] = {{1,PRI_OPEN},nil,nil}, -- Valdrakken Accord Insignia
+  [202094] = {{1,PRI_OPEN},nil,nil}, -- Maruuk Centaur Insignia
   --10.0 Profession Knowledge
   [201705] = {{1,PRI_REP},nil,nil}, -- Studying - All knowledge use "Studying"
   --10.0 Dragon Riding
@@ -1054,6 +1059,7 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
   [201837] = {{1,PRI_OPEN},nil,nil,-289433}, -- Magmammoth Harness (requires aura -> aura missing check)
   [201437] = {{5,PRI_OPEN},nil,nil}, -- Slumbering Dream Fragment
   [201779] = {{1,PRI_OPEN},nil,nil}, -- Merithra's Blessing
+  [201782] = {{1,PRI_OPEN},nil,nil}, -- Tyr's Blessing
   [194088] = {{1,PRI_OPEN},nil,nil}, -- Ohuna Companion Color: Dark
   [193205] = {{1,PRI_OPEN},nil,nil}, -- Ohuna Companion Color: Brown
   [194087] = {{1,PRI_OPEN},nil,nil}, -- Ohuna Companion Color: Red
@@ -1080,6 +1086,8 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
   [199833] = {{1,PRI_OPEN},nil,nil}, -- Dragonhead Eel
   [199832] = {{1,PRI_OPEN},nil,nil}, -- Smoked Seaviper
   [199103] = {{1,PRI_OPEN},nil,nil}, -- Nappa's Famous Tea
+  [199102] = {{1,PRI_OPEN},nil,nil}, -- Hunk o' Blubber
+  [199063] = {{1,PRI_OPEN},nil,nil}, -- Salted Fish Scraps
   
   --[] = {{1,PRI_OPEN},nil,nil}, -- 
   

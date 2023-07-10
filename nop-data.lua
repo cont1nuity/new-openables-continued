@@ -484,8 +484,23 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
   [118731] = {{1,PRI_OPEN},nil,nil}, -- Spires of Arak Treasure Map
   [ 21813] = {{1,PRI_OPEN},nil,nil}, -- Bag of Heart Candies
 -- 9.0
+
+-- 9.2
   [190339] = {{1,PRI_OPEN},nil,nil}, -- Enlightened Offering
-  [190198] = {{5,PRI_OPEN},nil,nil}, -- Sandworn Chest Key Fragment
+  [190198] = {{5,PRI_OPEN},nil,nil}, -- Sandworn Chest Key Fragment  
+  [189707] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Bronze and Gold Body
+  [189708] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Beryllium and Silver Body
+  [189709] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Cobalt and Copper Body
+  [189710] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Ruby and Platinum Body
+  [189711] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Gold and Ruby Components
+  [189712] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Silver and Beryllium Components
+  [189713] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Copper and Cobalt Components
+  [189714] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Platinum and Emerald Components
+  [189715] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Diamond Vambraces
+  [189716] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Face Decoration
+  [189717] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Shielded Core
+  [189718] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Upgraded Core
+  
 -- Memories of the Runecarver
   [182617] = {{1,PRI_REP},nil,{[1912] = true,}}, -- Memory of Death's Embrace
   [182625] = {{1,PRI_REP},nil,{[1912] = true,}}, -- Memory of an Everlasting Grip

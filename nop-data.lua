@@ -483,11 +483,10 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
   [118729] = {{1,PRI_OPEN},nil,nil}, -- Gorgrond Treasure Map
   [118731] = {{1,PRI_OPEN},nil,nil}, -- Spires of Arak Treasure Map
   [ 21813] = {{1,PRI_OPEN},nil,nil}, -- Bag of Heart Candies
--- 9.0
 
 -- 9.2
   [190339] = {{1,PRI_OPEN},nil,nil}, -- Enlightened Offering
-  [190198] = {{5,PRI_OPEN},nil,nil}, -- Sandworn Chest Key Fragment  
+  [190198] = {{5,PRI_OPEN},nil,nil}, -- Sandworn Chest Key Fragment
   [189707] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Bronze and Gold Body
   [189708] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Beryllium and Silver Body
   [189709] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Cobalt and Copper Body

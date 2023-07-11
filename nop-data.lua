@@ -488,7 +488,18 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
 -- 9.2
   [190339] = {{1,PRI_OPEN},nil,nil}, -- Enlightened Offering
   [190198] = {{5,PRI_OPEN},nil,nil}, -- Sandworn Chest Key Fragment  
-  [189707] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Bronze and Gold Body
+  [189707] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Bronze and Gold Body
+  [189708] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Beryllium and Silver Body
+  [189709] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Cobalt and Copper Body
+  [189710] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Ruby and Platinum Body
+  [189711] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Gold and Ruby Components
+  [189712] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Silver and Beryllium Components
+  [189713] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Copper and Cobalt Components
+  [189714] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Platinum and Emerald Components
+  [189715] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Diamond Vambraces
+  [189716] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Face Decoration
+  [189717] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Shielded Core
+  [189718] = {{1,PRI_OPEN},nil,nil}, -- Pocopoc's Upgraded Core
   [189708] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Beryllium and Silver Body
   [189709] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Cobalt and Copper Body
   [189710] = {{1,PRO_OPEN},nil,nil}, -- Pocopoc's Ruby and Platinum Body

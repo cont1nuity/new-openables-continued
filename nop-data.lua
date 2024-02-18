@@ -1166,6 +1166,7 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
   [190326] = {{10,PRI_OPEN},nil,nil}, -- Rousing Air
   [190328] = {{10,PRI_OPEN},nil,nil}, -- Rousing Frost
   [190330] = {{10,PRI_OPEN},nil,nil}, -- Rousing Decay
+  [190451] = {{10,PRI_OPEN},nil,nil}, -- Rousing Ire
   
   -- Treasure maps
   [194540] = {{1,PRI_OPEN},nil,nil}, -- Nokhud Armorer's Notes

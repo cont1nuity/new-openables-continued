@@ -175,6 +175,8 @@ function NOP:ItemToUse(itemID,count,prio,zone,map,aura,source) -- store item int
   --check required quest
   local quest = T_ITEM_REQUIRE_QUEST_NOT_COMPLETED[itemID]
   if quest and C_QuestLog.IsQuestFlaggedCompleted(quest) then
+    self:Verbose("ItemToUse:","not using item, because quest is flagged completed.","itemID",itemID)
+    T_USE[itemID] = nil
     return --don't show this item anymore
   end
   local pt = T_USE[itemID]

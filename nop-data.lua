@@ -91,6 +91,7 @@ NOP.T_SPELL_BY_NAME = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},
   [ 94227] = {{1,PRI_REP},nil,nil}, -- Stolen Golden Lotus Insignia
   [ 17047] = {{1,PRI_REP},nil,nil}, -- Argent Dawn Valor Token - "Increase Reputation"
   [210324] = {{1,PRI_REP},nil,nil}, -- Medal of Honor
+  [213389] = {{1,PRI_OPEN},nil,nil}, -- Ancient Centaur Diary - "Breaking Down"
   
   --10.0 Misc
   [198614] = {{1,PRI_OPEN},nil,nil}, -- Soggy Clump of Darkmoon Cards
@@ -1349,8 +1350,18 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
   [223906] = {{1,PRI_OPEN},nil,nil}, -- Asynchronized Tinker Gem
   [223904] = {{1,PRI_OPEN},nil,nil}, -- Asynchronized Cogwheel Gem
   [223905] = {{1,PRI_OPEN},nil,nil}, -- Asynchronized Meta Gem
-
-
+  
+  --Azeronian Archives
+  [213185] = {{1,PRI_OPEN},nil,nil}, -- Dusty Centaur Tome
+  [213175] = {{1,PRI_OPEN},nil,nil}, -- Dusty Djaradin Tome
+  [213188] = {{1,PRI_OPEN},nil,nil}, -- Dusty Dracthyr Tome
+  [213187] = {{1,PRI_OPEN},nil,nil}, -- Dusty Drakonid Tome
+  [213186] = {{1,PRI_OPEN},nil,nil}, -- Dusty Niffen Tome
+  [213190] = {{1,PRI_OPEN},nil,nil}, -- Preserved Djaradin Tome
+  [213189] = {{1,PRI_OPEN},nil,nil}, -- Preserved Drakonid Tome
+  [213176] = {{1,PRI_OPEN},nil,nil}, -- Preserved Isles Tome
+  [213177] = {{1,PRI_OPEN},nil,nil}, -- Immaculate Tome
+  
   -- 11.0
   -- Sparks
   [211297] = {{2,PRI_OPEN},nil,nil}, -- Fractured Spark of Omens
@@ -1376,8 +1387,6 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
   [228582] = {{1,PRI_OPEN},nil,nil}, -- Streamlined Relic
   [225906] = {{1,PRI_OPEN},nil,nil}, -- Lifeless Necrotic Relic
   [225907] = {{1,PRI_OPEN},nil,nil}, -- Relic of Sentience
-    [225249] = {{1,PRI_OPEN},nil,nil}, -- Rattling Bag o' Gold
-
   
   -- Contracts
   [222597] = {{1,PRI_OPEN},nil,nil,-454931}, -- Contract: Council of Dornogal
@@ -1393,180 +1402,6 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
   [222607] = {{1,PRI_OPEN},nil,nil,-454941}, -- Contract: The Severed Threads
   [222608] = {{1,PRI_OPEN},nil,nil,-454942}, -- Contract: The Severed Threads
 
-  
-  
- --From Comments
-[213185] = {{1,PRI_OPEN},nil,nil}, -- Dusty Centaur Tome
-[213175] = {{1,PRI_OPEN},nil,nil}, -- Dusty Djaradin Tome
-[213188] = {{1,PRI_OPEN},nil,nil}, -- Dusty Dracthyr Tome
-[213187] = {{1,PRI_OPEN},nil,nil}, -- Dusty Drakonid Tome
-[213186] = {{1,PRI_OPEN},nil,nil}, -- Dusty Niffen Tome
-[213190] = {{1,PRI_OPEN},nil,nil}, -- Preserved Djaradin Tome
-[213189] = {{1,PRI_OPEN},nil,nil}, -- Preserved Drakonid Tome
-[213176] = {{1,PRI_OPEN},nil,nil}, -- Preserved Isles Tome
-[213177] = {{1,PRI_OPEN},nil,nil}, -- Immaculate Tome
-[213389] = {{1,PRI_OPEN},nil,nil}, -- Ancient Centaur Diary
-[213025] = {{1,PRI_OPEN},nil,nil}, -- Ancient Djaradin Bolt
-[213020] = {{1,PRI_OPEN},nil,nil}, -- Ancient Drakonid Shovel
-[213024] = {{1,PRI_OPEN},nil,nil}, -- Bloody Djaradin Mug
-[213200] = {{1,PRI_OPEN},nil,nil}, -- Book of Horoscopes
-[213365] = {{1,PRI_OPEN},nil,nil}, -- Carved Cave Crystal
-[213215] = {{1,PRI_OPEN},nil,nil}, -- Carved Votive Stone
-[213021] = {{1,PRI_OPEN},nil,nil}, -- Corked Drakonid Vial
-[213359] = {{1,PRI_OPEN},nil,nil}, -- Cracked Drakonid Staff
-[212687] = {{1,PRI_OPEN},nil,nil}, -- Crude Toy Ducky
-[213357] = {{1,PRI_OPEN},nil,nil}, -- Crystal Scrying Bowl
-[212978] = {{1,PRI_OPEN},nil,nil}, -- Dragon Painter's Palette
-[213022] = {{1,PRI_OPEN},nil,nil}, -- Drakonid Blacksmith Hammer
-[212976] = {{1,PRI_OPEN},nil,nil}, -- Drakonid Duck Carving
-[212977] = {{1,PRI_OPEN},nil,nil}, -- Drakonid Sign Placard
-[213183] = {{1,PRI_OPEN},nil,nil}, -- Makeshift Beaded Bracelet
-[213429] = {{1,PRI_OPEN},nil,nil}, -- Meticulous Archivist's Appendix
-[213023] = {{1,PRI_OPEN},nil,nil}, -- Oil-Drenched Djaradin Torch
-[205223] = {{1,PRI_OPEN},nil,nil}, -- Ornamented Centaur Axe
-[213382] = {{1,PRI_OPEN},nil,nil}, -- Partial Centaur Hunting Map
-[212782] = {{1,PRI_OPEN},nil,nil}, -- Poorly Preserved Relic
-[213208] = {{1,PRI_OPEN},nil,nil}, -- Pot of Pickled Ancheevies
-[212650] = {{1,PRI_OPEN},nil,nil}, -- Pot of Tattooing Ink
-[213204] = {{1,PRI_OPEN},nil,nil}, -- Ruby-Studded Locket
-[212773] = {{1,PRI_OPEN},nil,nil}, -- Rusted Locket
-[213375] = {{1,PRI_OPEN},nil,nil}, -- Satchel of Buried Valuables
-[213192] = {{1,PRI_OPEN},nil,nil}, -- Scratched-Out List of Names
-[212762] = {{1,PRI_OPEN},nil,nil}, -- Tarnished Horn Signet
-[212769] = {{1,PRI_OPEN},nil,nil}, -- Tattered Wanted Poster
-
-
-  --Awakened  Elements
-  [190316] = {{1,PRI_OPEN},nil,nil}, -- Awakened Earth
-  [190321] = {{1,PRI_OPEN},nil,nil}, -- Awakened Fire
-  [190324] = {{1,PRI_OPEN},nil,nil}, -- Awakened Order
-  [190327] = {{1,PRI_OPEN},nil,nil}, -- Awakened Air
-  [190329] = {{1,PRI_OPEN},nil,nil}, -- Awakened Frost
-  [190331] = {{1,PRI_OPEN},nil,nil}, -- Awakened Decay
-  [190450] = {{1,PRI_OPEN},nil,nil}, -- Awakened Ire
-   [217242] = {{1,PRI_OPEN},nil,nil}, -- Awakening Stone Wing
-  [217243] = {{1,PRI_OPEN},nil,nil}, -- Awakening Ruby Wing
-  [211515] = {{2,PRI_OPEN},nil,nil}, -- Splintered Spark of Awakening  
-  
-  
-  --10.0 Profession
-  --Herbalism
-   [201705] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-  [201717] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-  [202014] = {{1,PRI_OPEN},nil,nil}, -- Infused Pollen
-  [200677] = {{1,PRI_OPEN},nil,nil}, -- Dreambloom Petal
-  [200678] = {{1,PRI_OPEN},nil,nil}, -- Dreambloom
-  [199115] = {{1,PRI_OPEN},nil,nil}, -- Herbalism Field Notes
-  --Mining
-  [194062] = {{1,PRI_OPEN},nil,nil}, -- Unyielding Stone Chunk
-  [201301] = {{1,PRI_OPEN},nil,nil}, -- Iridescent Ore
-  --Skinning
-  [202016] = {{1,PRI_OPEN},nil,nil}, -- Saturated Bone
-  [198841] = {{1,PRI_OPEN},nil,nil}, -- Large Sample of Curious Hide
-  [198837] = {{1,PRI_OPEN},nil,nil}, -- Curious Hide Scraps
-  --Alchemy
-  [193897] = {{1,PRI_OPEN},nil,nil}, -- Reawakened Catalyst
-  [198608] = {{1,PRI_OPEN},nil,nil}, -- Alchemy Notes
-  [193891] = {{1,PRI_OPEN},nil,nil}, -- Experimental Substance
-  [198964] = {{1,PRI_OPEN},nil,nil}, -- Elementious Splinter
-  [198685] = {{1,PRI_OPEN},nil,nil}, -- Well Insulated Mug
-  [198697] = {{1,PRI_OPEN},nil,nil}, -- Contraband Concoction
-  [198599] = {{1,PRI_OPEN},nil,nil}, -- Experimental Decay Sample
-  [198710] = {{1,PRI_OPEN},nil,nil}, -- Canteen of Suspicious Water
-  [198712] = {{1,PRI_OPEN},nil,nil}, -- Firewater Powder Sample
-  [198663] = {{1,PRI_OPEN},nil,nil}, -- Frostforged Potion
-  [201003] = {{1,PRI_OPEN},nil,nil}, -- Furry Gloop
-  --
-  [198660] = {{1,PRI_OPEN},nil,nil}, -- Fragmented Key
-  --Smithing
-  [198606] = {{1,PRI_OPEN},nil,nil}, -- Blacksmith's Writ
-  [201007] = {{1,PRI_OPEN},nil,nil}, -- Ancient Monument
-  [201005] = {{1,PRI_OPEN},nil,nil}, -- Curious Ingots
-  [201008] = {{1,PRI_OPEN},nil,nil}, -- Molten Ingot
-  [201010] = {{1,PRI_OPEN},nil,nil}, -- Qalashi Weapon Diagram
-  [201004] = {{1,PRI_OPEN},nil,nil}, -- Ancient Spear Shards
-  [201009] = {{1,PRI_OPEN},nil,nil}, -- Falconer Gauntlet Drawings
-  [201011] = {{1,PRI_OPEN},nil,nil}, -- Spelltouched Tongs
-  [201006] = {{1,PRI_OPEN},nil,nil}, -- Draconic Flux
-  --Tailoring
-  [198609] = {{1,PRI_OPEN},nil,nil}, -- Tailoring Examples
-  [198699] = {{1,PRI_OPEN},nil,nil}, -- Mysterious Banner
-  [198702] = {{1,PRI_OPEN},nil,nil}, -- Itinerant Singed Fabric
-  [198692] = {{1,PRI_OPEN},nil,nil}, -- Noteworthy Scrap of Carpet
-  [201020] = {{1,PRI_OPEN},nil,nil}, -- Silky Surprise
-  [198680] = {{1,PRI_OPEN},nil,nil}, -- Decaying Brackenhide Blanket
-  [198662] = {{1,PRI_OPEN},nil,nil}, -- Intriguing Bolt of Blue Cloth
-  [198684] = {{1,PRI_OPEN},nil,nil}, -- Miniature Bronze Dragonflight Banner
-  [201019] = {{1,PRI_OPEN},nil,nil}, -- Ancient Dragonweave Bolt
-  --Leatherworking
-  [200979] = {{1,PRI_OPEN},nil,nil}, -- Dusty Leatherworker's Diagrams
-  [198667] = {{1,PRI_OPEN},nil,nil}, -- Spare Djaradin Tools
-  [198696] = {{1,PRI_OPEN},nil,nil}, -- Wind-Blessed Hide
-  [201018] = {{1,PRI_OPEN},nil,nil}, -- Well-Danced Drum
-  [198658] = {{1,PRI_OPEN},nil,nil}, -- Decay-Infused Tanning Oil
-  [198683] = {{1,PRI_OPEN},nil,nil}, -- Treated Hides
-  [198690] = {{1,PRI_OPEN},nil,nil}, -- Decayed Scales
-  [198711] = {{1,PRI_OPEN},nil,nil}, -- Poacher's Pack
-  --
-  [200980] = {{1,PRI_OPEN},nil,nil}, -- Dusty Herbalist's Notes
-  --Enchanting
-  [198798] = {{1,PRI_OPEN},nil,nil}, -- Flashfrozen Scroll
-  [198675] = {{1,PRI_OPEN},nil,nil}, -- Lava-Infused Seed
-  [198689] = {{1,PRI_OPEN},nil,nil}, -- Stormbound Horn
-  [198799] = {{1,PRI_OPEN},nil,nil}, -- Forgotten Arcane Tome
-  [201013] = {{1,PRI_OPEN},nil,nil}, -- Faintly Enchanted Remains
-  [201012] = {{1,PRI_OPEN},nil,nil}, -- Enchanted Debris
-  [198694] = {{1,PRI_OPEN},nil,nil}, -- Enriched Earthen Shard
-  [198800] = {{1,PRI_OPEN},nil,nil}, -- Fractured Titanic Sphere
-  --Engineering
-  [201014] = {{1,PRI_OPEN},nil,nil}, -- Boomthyr Rocket
-  [198789] = {{1,PRI_OPEN},nil,nil}, -- Intact Coil Capacitor
-  --Inscription
-  [200973] = {{1,PRI_OPEN},nil,nil}, -- Dusty Scribe's Runic Drawings
-  [198703] = {{1,PRI_OPEN},nil,nil}, -- Sign Language Reference Sheet
-  [198693] = {{1,PRI_OPEN},nil,nil}, -- Dusty Darkmoon Card
-  [198704] = {{1,PRI_OPEN},nil,nil}, -- Pulsing Earth Rune
-  [198659] = {{1,PRI_OPEN},nil,nil}, -- Forgetful Apprentice's Tome
-  [201015] = {{1,PRI_OPEN},nil,nil}, -- Counterfeit Darkmoon Deck
-  [198669] = {{1,PRI_OPEN},nil,nil}, -- How to Train Your Whelpling
-  [198686] = {{1,PRI_OPEN},nil,nil}, -- Frosted Parchment
-  --Jewelcrafting
-  [198687] = {{1,PRI_OPEN},nil,nil}, -- Closely Guarded Shiny
-  [201017] = {{1,PRI_OPEN},nil,nil}, -- Igneous Gem
-  [198670] = {{1,PRI_OPEN},nil,nil}, -- Lofty Malygite
-  [198660] = {{1,PRI_OPEN},nil,nil}, -- Fragmented Key
-  [198664] = {{1,PRI_OPEN},nil,nil}, -- Crystalline Overgrowth
-  [201016] = {{1,PRI_OPEN},nil,nil}, -- Harmonic Crystal Harmonizer
-  [198682] = {{1,PRI_OPEN},nil,nil}, -- Alexstraszite Cluster
-  [198656] = {{1,PRI_OPEN},nil,nil}, -- Painter's Pretty Jewel
-
-
-
-	[194062] = {{1,PRI_OPEN},nil,nil}, -- Unyielding Stone Chunk
-	[199122] = {{1,PRI_OPEN},nil,nil}, -- Mining Field Notes
-	[201716] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-	[201700] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-	[194039] = {{1,PRI_OPEN},nil,nil}, -- Heated Ore Sample
-	[199122] = {{1,PRI_OPEN},nil,nil}, -- Mining Field Notes
-	[201300] = {{1,PRI_OPEN},nil,nil}, -- Iridescent Ore Fragments
-	[202011] = {{1,PRI_OPEN},nil,nil}, -- Elementally-Charged Stone
-	[194062] = {{1,PRI_OPEN},nil,nil}, -- Unyielding Stone Chunk
-	[201714] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-	[201718] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-	[201706] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-	[198963] = {{1,PRI_OPEN},nil,nil}, -- Decaying Phlegm
-	[201708] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-	[201715] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-	[201713] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-	[201709] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-	[201710] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-	[201711] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-	[193907] = {{1,PRI_OPEN},nil,nil}, -- Chipped Tyrstone
-	[201712] = {{1,PRI_OPEN},nil,nil}, -- Notebook of Crafting Knowledge
-	[193909] = {{1,PRI_OPEN},nil,nil}, -- Ancient Gem Fragments
-	[198974] = {{1,PRI_OPEN},nil,nil}, -- Elegantly Engraved Embellishment
-	[198973] = {{1,PRI_OPEN},nil,nil}, -- Incandescent Curio
-	[198612] = {{1,PRI_OPEN},nil,nil}, -- Jeweler's Cuts
   
   --[] = {{1,PRI_OPEN},nil,nil}, -- 
   

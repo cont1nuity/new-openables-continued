@@ -10,7 +10,7 @@ local GetContainerItemID = _G.GetContainerItemID or C_Container.GetContainerItem
 local GetContainerItemLink = _G.GetContainerItemLink or C_Container.GetContainerItemLink; assert(GetContainerItemLink ~= nil,'GetContainerItemLink')
 local GetContainerNumSlots = _G.GetContainerNumSlots or C_Container.GetContainerNumSlots; assert(GetContainerNumSlots ~= nil,'GetContainerNumSlots')
 local GetItemInfo = _G.GetItemInfo or _G.C_Item.GetItemInfo; assert(GetItemInfo ~= nil,'GetItemInfo')
-local GetSpellInfo = _G.GetSpellInfo or _G.C_Spell.GetSpellInfo; assert(GetSpellInfo ~= nil,'GetSpellInfo')
+local GetSpellInfo = _G.GetSpellInfo or _G.C_Spell.GetSpellName; assert(GetSpellInfo ~= nil,'GetSpellInfo') -- intentionally use GetSpellName here, as that is what we use later
 local GetTime = _G.GetTime; assert(GetTime ~= nil,'GetTime')
 local issecurevariable = _G.issecurevariable; assert(issecurevariable ~= nil,'issecurevariable')
 local math = _G.math; assert(math ~= nil,'math')

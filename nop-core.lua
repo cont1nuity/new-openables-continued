@@ -23,7 +23,7 @@ local GetMinimapZoneText = _G.GetMinimapZoneText; assert(GetMinimapZoneText ~= n
 local GetNumArchaeologyRaces = _G.GetNumArchaeologyRaces; assert(GetNumArchaeologyRaces ~= nil,'GetNumArchaeologyRaces')
 local GetNumFactions = _G.GetNumFactions or _G.C_Reputation.GetNumFactions; assert(GetNumFactions ~= nil,'GetNumFactions')
 local GetSpellCooldown = _G.GetSpellCooldown or _G.C_Spell.GetSpellCooldown; assert(GetSpellCooldown ~= nil,'GetSpellCooldown')
-local GetSpellInfo = _G.GetSpellInfo or _G.C_Spell.GetSpellInfo; assert(GetSpellInfo ~= nil,'GetSpellInfo')
+local GetSpellInfo = _G.GetSpellInfo or _G.C_Spell.GetSpellName; assert(GetSpellInfo ~= nil,'GetSpellInfo') -- intentionally use GetSpellName here, as that is what we use later
 local GetTime = _G.GetTime; assert(GetTime ~= nil,'GetTime')
 local gsub = _G.gsub; assert(gsub ~= nil,'gsub')
 local InCombatLockdown = _G.InCombatLockdown; assert(InCombatLockdown ~= nil,'InCombatLockdown')

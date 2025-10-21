@@ -198,18 +198,23 @@ NOP.slash_handler = function(msg, editbox) -- /nop handler
     return
   end
   if cmd == "add" then
-    local id = tonumber(arg)
-    local printed = false
-    if id then
-      if NOP.AceDB.profile["T_TRACKLIST"] ~= nil then NOP.AceDB.profile.T_TRACKLIST[id] = {{1,PRI_OPEN},nil,nil}; NOP:BAG_UPDATE() end
-      print("Item ID",id,"added to the tracking list.")
+  -- Try to match: add <itemID> <qty>
+  local itemID, qty = msg:match("^%s*add%s+(%d+)%s*(%d*)")
+  itemID = tonumber(itemID)
+  qty = tonumber(qty) or 1  -- fallback to 1
+
+  if itemID then
+    if NOP.AceDB.profile["T_TRACKLIST"] ~= nil then
+      -- Overwrite the entry cleanly
+      NOP.AceDB.profile.T_TRACKLIST[itemID] = {{qty, PRI_OPEN}, nil, nil}
+      NOP:BAG_UPDATE()
     end
-    return
+    print("Item ID", itemID, "added to the tracking list with quantity", qty..".")
+  else
+    print("Invalid input. Usage: /nop add <itemID> <quantity>")
   end
-  local usage = {string.split("\n", P.L["NOP_USE"] .. P.CONSOLE_CMD .. P.CONSOLE_USAGE)}
-  for _,line in pairs(usage) do 
-    print(line)
-  end
+  return
+end
 end
 _G.SLASH_NOP_SWITCH1 = P.CONSOLE_CMD
 _G.SlashCmdList["NOP_SWITCH"] = NOP.slash_handler

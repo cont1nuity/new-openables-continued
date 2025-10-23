@@ -198,23 +198,25 @@ NOP.slash_handler = function(msg, editbox) -- /nop handler
     return
   end
   if cmd == "add" then
-  -- Try to match: add <itemID> <qty>
-  local itemID, qty = msg:match("^%s*add%s+(%d+)%s*(%d*)")
-  itemID = tonumber(itemID)
-  qty = tonumber(qty) or 1  -- fallback to 1
+    -- Try to match: add <itemID> <qty>
+    local itemID, qty = msg:match("^%s*add%s+(%d+)%s*(%d*)")
+    itemID = tonumber(itemID)
+    qty = tonumber(qty) or 1  -- fallback to 1
 
-  if itemID then
-    if NOP.AceDB.profile["T_TRACKLIST"] ~= nil then
-      -- Overwrite the entry cleanly
-      NOP.AceDB.profile.T_TRACKLIST[itemID] = {{qty, PRI_OPEN}, nil, nil}
-      NOP:BAG_UPDATE()
+    if itemID then
+      if NOP.AceDB.profile["T_TRACKLIST"] ~= nil then
+        -- Overwrite the entry cleanly
+        NOP.AceDB.profile.T_TRACKLIST[itemID] = {{qty, PRI_OPEN}, nil, nil}
+        NOP:BAG_UPDATE()
+        print("Item ID", itemID, "added to the tracking list with quantity", qty..".")
+      else
+        print("Unable to add the itemID to the tracklist, as the list does not exist.")
+      end
+    else
+      print("Invalid input. Usage: /nop add <itemID> <quantity>")
     end
-    print("Item ID", itemID, "added to the tracking list with quantity", qty..".")
-  else
-    print("Invalid input. Usage: /nop add <itemID> <quantity>")
+    return
   end
-  return
-end
 end
 _G.SLASH_NOP_SWITCH1 = P.CONSOLE_CMD
 _G.SlashCmdList["NOP_SWITCH"] = NOP.slash_handler

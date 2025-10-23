@@ -217,6 +217,10 @@ NOP.slash_handler = function(msg, editbox) -- /nop handler
     end
     return
   end
+  local usage = {string.split("\n", P.L["NOP_USE"] .. P.CONSOLE_CMD .. P.CONSOLE_USAGE)}
+  for _,line in pairs(usage) do 
+    print(line)
+  end
 end
 _G.SLASH_NOP_SWITCH1 = P.CONSOLE_CMD
 _G.SlashCmdList["NOP_SWITCH"] = NOP.slash_handler

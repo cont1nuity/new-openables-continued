@@ -23,6 +23,7 @@ jobs:
         with:
           beta: true
           ptr: true
+          depth: '1'
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6

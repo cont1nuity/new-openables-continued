@@ -21,8 +21,8 @@ jobs:
       - name: Update TOC Interface version retail
         uses: cont1nuity/toc-interface-updater@master
         with:
-          flavor: retail # this is the default
-          ptr: true   # this is optional
+          beta: true
+          ptr: true
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6

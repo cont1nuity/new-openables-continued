@@ -123,6 +123,10 @@ function NOP:ItemGetPattern(itemID,bag,slot) -- looking for usable item via patt
     self:Verbose("ItemGetPattern:","itemID",itemID,"will be shown as MOUNT")
     return 1, P.PRI_OPEN --fallback for mounts
   end
+  if classID == Enum.ItemClass.Housing and subclassID == Enum.ItemHousingSubclass.Decor then
+    self:Verbose("ItemGetPattern:","itemID",itemID,"will be shown as DECOR")
+    return 1, P.PRI_OPEN --fallback for housing decor
+  end
   if classID == Enum.ItemClass.Consumable and subclassID == Enum.ItemConsumableSubclass.Other then
     local tMogSet = C_Item.GetItemLearnTransmogSet(itemID)
     if tMogSet then

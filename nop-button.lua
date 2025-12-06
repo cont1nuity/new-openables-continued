@@ -472,7 +472,7 @@ function NOP.ActionButton_GetOverlayGlow()
   local overlay = tremove(unusedOverlayGlows)
   if not overlay then
     numOverlays = numOverlays + 1
-    overlay = CreateFrame("Frame", ADDON .. "ActionButtonOverlay"..numOverlays, NOP.frameHiderB, "ActionBarButtonSpellActivationAlert")
+    overlay = CreateFrame("Frame", ADDON .. "ActionButtonOverlay"..numOverlays, NOP.frameHiderB, "ActionButtonSpellAlertTemplate")
   end
   return overlay;
 end

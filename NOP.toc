@@ -32,6 +32,7 @@ nop-locale-deDE.lua
 nop-locale-esES.lua 
 nop-locale-zhTW.lua
 nop-locale-zhCN.lua
+nop-locale-ruRU.lua
 
 nop-private.lua
 nop-data.lua 

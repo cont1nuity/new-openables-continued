@@ -400,10 +400,11 @@ function NOP:ItemShow(itemID,prio) -- add item to button
   if type(itemTexture) == "table" then
     itemTexture = itemTexture.iconFileID
   end
-  --local mtext = format(P.MACRO_ACTIVE,itemID)
-  local mtext = nil
+  local mtext = format(P.MACRO_ACTIVE,itemID)
+  --local mtext = nil
+  local mtarget = nil 
   --local mtarget = format("%d",itemID)
-  local mtarget = format("item:%d", itemID)
+  --local mtarget = format("item:%d", itemID)
   --local mtarget = format("%d %d", bagID, slotID)
   local mtargetitem = nil
   local mtargetbag = nil

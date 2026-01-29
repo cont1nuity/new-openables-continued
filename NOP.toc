@@ -1,4 +1,4 @@
-## Interface: 110207, 120000, 120001
+## Interface: 120000, 120001
 ## Title: New |cffffff88Openables|r
 ## Author: cont1nuity (previous maintainers/creators: srhinos, PeknaMrcha alias EduardCurse alias Edik)
 #@version-retail@

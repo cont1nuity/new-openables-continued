@@ -5,7 +5,8 @@ local assert = _G.assert
 local BROWSE_NO_RESULTS = _G.BROWSE_NO_RESULTS; assert(BROWSE_NO_RESULTS ~= nil,'BROWSE_NO_RESULTS')
 local CreateFrame = _G.CreateFrame; assert(CreateFrame ~= nil,'CreateFrame')
 local GameTooltip = _G.GameTooltip; assert(GameTooltip ~= nil,'GameTooltip')
-local GameTooltip_SetDefaultAnchor = _G.GameTooltip_SetDefaultAnchor; assert(GameTooltip_SetDefaultAnchor ~= nil,'GameTooltip_SetDefaultAnchor')
+--local GameTooltip_SetDefaultAnchor = _G.GameTooltip_SetDefaultAnchor; assert(GameTooltip_SetDefaultAnchor ~= nil,'GameTooltip_SetDefaultAnchor') -- no local, because of hooks
+local GameTooltip_SetDefaultAnchor_Exists = _G.GameTooltip_SetDefaultAnchor_Exists; assert(GameTooltip_SetDefaultAnchor_Exists ~= nil,'GameTooltip_SetDefaultAnchor')
 local GetCVar = _G.GetCVar; assert(GetCVar ~= nil,'GetCVar')
 local GetItemCooldown = _G.GetItemCooldown or _G.C_Item.GetItemCooldown; assert(GetItemCooldown ~= nil,'GetItemCooldown')
 local GetItemInfo = _G.GetItemInfo or _G.C_Item.GetItemInfo; assert(GetItemInfo ~= nil,'GetItemInfo')

@@ -26,6 +26,7 @@ function NOP:ProfileLoad() -- LUA stored variables load and init
   local defaults = {
     global = {
       ["editMode"] = {}, -- Blizzard Edit Mode positions, separated by Edit Mode layout
+      ["editModeMigration"] = 0, -- one-time migration from the legacy button anchor
     },
     profile = {
       ["iconSize"] = P.DEFAULT_ICON_SIZE, -- default size

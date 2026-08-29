@@ -217,6 +217,12 @@ function NOP:ButtonSize() -- resize button
   if not (GetScreenWidth() > 1500) then iconSize = math.floor(iconSize * 0.75) end
   self.BF:SetWidth(iconSize)
   self.BF:SetHeight(iconSize)
+  -- ActionButtonTemplate's normal texture is sized for Blizzard action bars
+  -- and otherwise extends well beyond a small standalone button in Midnight.
+  if self.BF.normal and not (self.masque and NOP.AceDB.profile.masque) then
+    self.BF.normal:ClearAllPoints()
+    self.BF.normal:SetAllPoints(self.BF)
+  end
   if NOP.AceDB.profile.qb_sticky then self:QBAnchorSize(); self:QBUpdate(); end -- Quest Bar is locked to Item Button
 end
 function NOP:ButtonSave(skipEditMode) -- save button position after move

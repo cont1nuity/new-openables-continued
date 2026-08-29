@@ -62,6 +62,20 @@ local function SetInside(obj, anchor, xOffset, yOffset)
   obj:SetPoint('TOPLEFT', anchor, 'TOPLEFT', xOffset, -yOffset)
   obj:SetPoint('BOTTOMRIGHT', anchor, 'BOTTOMRIGHT', -xOffset, yOffset)
 end
+local function HideActionButtonFrame(button)
+  if button.normal then
+    button.normal:SetTexture(nil)
+    button.normal:Hide()
+    button.normal:SetAlpha(0)
+  end
+end
+local function SetPlainButtonLook(button)
+  if button.icon then
+    button.icon:ClearAllPoints()
+    button.icon:SetAllPoints(button)
+  end
+  HideActionButtonFrame(button)
+end
 --
 function NOP:ButtonSkin(button,skin) -- skin or restore button look
   if not button then return end
@@ -90,18 +104,14 @@ function NOP:ButtonSkin(button,skin) -- skin or restore button look
     end
     if not _G.WWM then button.icon:SetTexCoord(0.08,0.92,0.08,0.92) end -- cut out icon border
     if button.icon.SetInside then button.icon:SetInside() else SetInside(button.icon) end
-    button.normal:SetTexture(nil) -- kill texture
-    button.normal:Hide() -- hide overlay
-    button.normal:SetAlpha(0) -- kill transparency
+    HideActionButtonFrame(button)
     button.hotkey:ClearAllPoints()
     button.hotkey:SetPoint("TOPRIGHT", 1, -2)
     button.isSkinned = true -- skin only once
   else
     if (button.isSkinned == nil) then return end -- nothing to restore is not skinned
     if button.b_icon then button.icon:SetTexCoord(unpack(button.b_icon)) end
-    if button.b_texture then button.normal:SetTexture(button.b_texture) end
-    if button.b_alpha then button.normal:SetAlpha(button.b_alpha) end
-    button.normal:Show()
+    SetPlainButtonLook(button)
     button.count:ClearAllPoints()
     if button.b_count then button.count:SetPoint(unpack(button.b_count)) end
     button.hotkey:ClearAllPoints()
@@ -217,11 +227,10 @@ function NOP:ButtonSize() -- resize button
   if not (GetScreenWidth() > 1500) then iconSize = math.floor(iconSize * 0.75) end
   self.BF:SetWidth(iconSize)
   self.BF:SetHeight(iconSize)
-  -- ActionButtonTemplate's normal texture is sized for Blizzard action bars
-  -- and otherwise extends well beyond a small standalone button in Midnight.
+  -- Midnight's ActionButtonTemplate draws an action-bar frame over standalone
+  -- buttons. Keep the icon unframed; Masque supplies its own layer when used.
   if self.BF.normal and not (self.masque and NOP.AceDB.profile.masque) then
-    self.BF.normal:ClearAllPoints()
-    self.BF.normal:SetAllPoints(self.BF)
+    if NOP.AceDB.profile.skinButton then HideActionButtonFrame(self.BF) else SetPlainButtonLook(self.BF) end
   end
   if NOP.AceDB.profile.qb_sticky then self:QBAnchorSize(); self:QBUpdate(); end -- Quest Bar is locked to Item Button
 end

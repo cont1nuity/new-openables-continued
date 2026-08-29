@@ -205,7 +205,7 @@ function NOP:ButtonReset() -- reset button to default position
   self.AceDB.profile.lockButton = false -- unlock
   self.AceDB.profile.button = {"CENTER", nil, "CENTER", 0, 0}
   self:ButtonSize()
-  self:ButtonMove()
+  self:ButtonMove(true)
   self:QBUpdate()
   print(L["BUTTON_RESET"])
 end
@@ -219,14 +219,22 @@ function NOP:ButtonSize() -- resize button
   self.BF:SetHeight(iconSize)
   if NOP.AceDB.profile.qb_sticky then self:QBAnchorSize(); self:QBUpdate(); end -- Quest Bar is locked to Item Button
 end
-function NOP:ButtonSave() -- save button position after move
+function NOP:ButtonSave(skipEditMode) -- save button position after move
   if not self.BF then return end
   local point, relativeTo, relativePoint, xOfs, yOfs = self.BF:GetPoint()
   NOP.AceDB.profile.button = {point or "CENTER", relativeTo and relativeTo.GetName and relativeTo:GetName() or "UIParent", relativePoint or "CENTER", xOfs, yOfs}
+  if not skipEditMode then self:EditModeSavePosition() end
 end
-function NOP:ButtonMove() -- move button from UI config
+function NOP:ButtonMove(useProfilePosition) -- move button from UI config or active Edit Mode layout
   if self:inCombat() then self:TimerFire("ButtonMove", TIMER_IDLE); return end
   self.BF:SetClampedToScreen(true)
+
+  if self.editModeRegistered and not useProfilePosition then
+    self.editModeLib:RepositionFrame(self.BF)
+    self:ButtonSave(true)
+    return
+  end
+
   self.BF:ClearAllPoints()
   local frame = NOP.AceDB.profile.button[2] or "none"
   if _G[frame] then frame = _G[frame] else frame = nil end -- test if can find frame by name in saved LUA variables
@@ -406,7 +414,9 @@ function NOP:ButtonHide() -- hide button
   self:ButtonCount(bt.itemCount)
   self.ActionButton_HideOverlayGlow(bt)
   --ActionButton_HideOverlayGlow(bt)
-  if NOP.AceDB.profile.visible then  -- show fake button, instead hide.
+  if self:EditModeIsActive() then -- keep a placeholder visible while arranging the UI
+    if not (bt:IsShown() or bt:IsVisible()) then bt:Show() end
+  elseif NOP.AceDB.profile.visible then  -- show fake button, instead hide.
     if not (bt:IsShown() or bt:IsVisible()) then bt:Show() end
   else
     if bt:IsShown() or bt:IsVisible() then bt:Hide() end

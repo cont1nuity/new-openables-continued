@@ -24,6 +24,9 @@ function NOP:ProfileChanged() -- LUA stored variables changed
 end
 function NOP:ProfileLoad() -- LUA stored variables load and init
   local defaults = {
+    global = {
+      ["editMode"] = {}, -- Blizzard Edit Mode positions, separated by Edit Mode layout
+    },
     profile = {
       ["iconSize"] = P.DEFAULT_ICON_SIZE, -- default size
       ["lockButton"] = false, -- unlock
@@ -279,7 +282,7 @@ function NOP:OptionsLoad() -- load options for UI config
             max = 1000,
             step = 1,
             bigStep = 10,
-            set = function(info,val) NOP.AceDB.profile.button[4] = val; NOP:ButtonMove(); end,
+            set = function(info,val) NOP.AceDB.profile.button[4] = val; NOP:ButtonMove(true); end,
             get = function(info) return NOP.AceDB.profile.button[4] end,
           },
           GMFy = {
@@ -291,7 +294,7 @@ function NOP:OptionsLoad() -- load options for UI config
             max = 500,
             step = 1,
             bigStep = 10,
-            set = function(info,val) NOP.AceDB.profile.button[5] = val; NOP:ButtonMove(); end,
+            set = function(info,val) NOP.AceDB.profile.button[5] = val; NOP:ButtonMove(true); end,
             get = function(info) return NOP.AceDB.profile.button[5] end,
           },
           header2 = {

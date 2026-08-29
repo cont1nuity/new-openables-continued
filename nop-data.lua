@@ -277,6 +277,9 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
   -- Midnight
   [268297] = {{1,PRI_OPEN},nil,nil}, -- Rattling Bag o' Gold
 
+  -- Recurring events
+  [ 45072] = {{1,PRI_OPEN},nil,nil}, -- Brightly Colored Egg
+
   [166999] = {{1,PRI_OPEN},nil,nil}, -- [Treasure Map]
   [ 47030] = {{1,PRI_OPEN},nil,nil}, -- [Huge Seaforium Bombs]
   [ 46847] = {{1,PRI_OPEN},nil,nil}, -- [Huge Seaforium Bombs]
@@ -1468,7 +1471,7 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
   
   -- 11.2
   -- Sparks
-  [231757] = {{2,PRI_OPEN},nil,nil}, -- Fractured Spark of Fortunes
+  [231757] = {{2,PRI_OPEN},nil,nil}, -- Fractured Spark of Starlight
   --[] = {{1,PRI_OPEN},nil,nil}, -- 
   
 }

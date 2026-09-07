@@ -69,12 +69,26 @@ local function HideActionButtonFrame(button)
     button.normal:SetAlpha(0)
   end
 end
+local function FitActionButtonStateTexture(texture, button)
+  if not texture then return end
+  texture:ClearAllPoints()
+  texture:SetAllPoints(button)
+end
+local function FitActionButtonStateTextures(button)
+  -- Midnight's ActionButtonTemplate keeps these textures at its native
+  -- action-bar size. On a resized standalone button they extend past the icon
+  -- when the button is hovered, pressed, or checked.
+  FitActionButtonStateTexture(button.GetHighlightTexture and button:GetHighlightTexture(), button)
+  FitActionButtonStateTexture(button.GetPushedTexture and button:GetPushedTexture(), button)
+  FitActionButtonStateTexture(button.GetCheckedTexture and button:GetCheckedTexture(), button)
+end
 local function SetPlainButtonLook(button)
   if button.icon then
     button.icon:ClearAllPoints()
     button.icon:SetAllPoints(button)
   end
   HideActionButtonFrame(button)
+  FitActionButtonStateTextures(button)
 end
 --
 function NOP:ButtonSkin(button,skin) -- skin or restore button look
@@ -109,23 +123,23 @@ function NOP:ButtonSkin(button,skin) -- skin or restore button look
     button.hotkey:SetPoint("TOPRIGHT", 1, -2)
     button.isSkinned = true -- skin only once
   else
-    if (button.isSkinned == nil) then return end -- nothing to restore is not skinned
+    if button.isSkinned == nil then SetPlainButtonLook(button); return end
     if button.b_icon then button.icon:SetTexCoord(unpack(button.b_icon)) end
-    SetPlainButtonLook(button)
     button.count:ClearAllPoints()
     if button.b_count then button.count:SetPoint(unpack(button.b_count)) end
     button.hotkey:ClearAllPoints()
     if button.b_hotkey then button.hotkey:SetPoint(unpack(button.b_hotkey)) end
     if button.b_htexture then button:SetHighlightTexture(button.b_htexture) end
     if button.b_ptexture then button:SetPushedTexture(button.b_ptexture) end
-    if button.cooldown and button.cooldown.SetDrawEdge then 
-      if button.b_draw then 
+    if button.cooldown and button.cooldown.SetDrawEdge then
+      if button.b_draw then
         button.cooldown:SetDrawEdge(button.b_draw)
         button.cooldown:SetDrawBling(button.b_draw)
         button.cooldown:SetDrawSwipe(button.b_draw)
       end
       button.cooldown:SetSwipeColor(0.1, 0.1, 0.1, .8)
     end
+    SetPlainButtonLook(button)
     button.isSkinned = nil
   end
 end

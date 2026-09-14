@@ -153,6 +153,7 @@ function NOP:PLAYER_LOGIN() -- player entering game
   self.frameHiderQ:SetAllPoints(UIParent)
   RegisterStateDriver(self.frameHiderQ, "visibility", "[petbattle] [vehicleui] hide; show")
   self:ButtonLoad() -- create button
+  self:EditModeRegister() -- expose the item button in Blizzard Edit Mode
   self:QBAnchor() -- create quest bar
   self:TimerFire('LOOT_SPEC', TIMER_IDLE)
   local key = GetBindingKey("CLICK " .. BUTTON_FRAME .. ":LeftButton")

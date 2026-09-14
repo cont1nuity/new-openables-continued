@@ -6,11 +6,12 @@
 #@end-version-retail@
 ## Notes: Popup Button and keybind for opening or using items in your bags. Continued version of the original NOP to support Dragonflight.
 ## SavedVariables: NewOpenablesProfile
-## OptionalDeps: Masque, WagoAnalytics
+## OptionalDeps: Masque, WagoAnalytics, EditModeExpanded
 ## X-Curse-Project-ID: 790748
 ## X-Wago-ID: RBKpYOGE
 
 LibStub\LibStub.lua
+EditModeExpanded-1.0\EditModeExpanded-1.0.xml
 WagoAnalytics\Shim.lua
 CallbackHandler-1.0\CallbackHandler-1.0.lua
 AceAddon-3.0\AceAddon-3.0.xml
@@ -36,6 +37,7 @@ nop-locale-ruRU.lua
 
 nop-private.lua
 nop-data.lua 
+nop-editmode.lua
 nop-button.lua
 nop-profile.lua
 nop-events.lua

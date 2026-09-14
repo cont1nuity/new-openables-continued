@@ -43,6 +43,20 @@ local VALDRAKKEN = P.VALDRAKKEN; assert(VALDRAKKEN ~= nil,'VALDRAKKEN')
 local ISKAARA = P.ISKAARA; assert(ISKAARA ~= nil,'ISKAARA')
 --
 NOP.T_ITEM_REQUIRE_QUEST_NOT_COMPLETED = { -- [itemID] = questID, entries where questID needs to be not completed
+  -- Midnight
+  [245757] = 95131, -- Thalassian Treatise on Inscription
+  [245763] = 95128, -- Thalassian Treatise on Blacksmithing
+  [245761] = 95130, -- Thalassian Treatise on Herbalism
+  [245755] = 95127, -- Thalassian Treatise on Alchemy
+  [245762] = 95135, -- Thalassian Treatise on Mining
+  [245756] = 95137, -- Thalassian Treatise on Tailoring
+  [245809] = 95138, -- Thalassian Treatise on Engineering
+  [245759] = 95129, -- Thalassian Treatise on Enchanting
+  [245828] = 95136, -- Thalassian Treatise on Skinning
+  [245760] = 95133, -- Thalassian Treatise on Jewelcrafting
+  [245758] = 95134, -- Thalassian Treatise on Leatherworking
+
+  -- The War Within
   [222548] = 83730, -- Algari Treatise on Inscription
   [222554] = 83726, -- Algari Treatise on Blacksmithing
   [222552] = 83729, -- Algari Treatise on Herbalism
@@ -260,6 +274,12 @@ NOP.T_DISENCHANT_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",..
   [201359] = {{1,PRI_OPEN},nil,nil}, -- Glimmer of Earth
 }
 NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]=true,...},auraID}, table for opening/use item by itemID, when is no possible to check for any common text
+  -- Midnight
+  [268297] = {{1,PRI_OPEN},nil,nil}, -- Rattling Bag o' Gold
+
+  -- Recurring events
+  [ 45072] = {{1,PRI_OPEN},nil,nil}, -- Brightly Colored Egg
+
   [166999] = {{1,PRI_OPEN},nil,nil}, -- [Treasure Map]
   [ 47030] = {{1,PRI_OPEN},nil,nil}, -- [Huge Seaforium Bombs]
   [ 46847] = {{1,PRI_OPEN},nil,nil}, -- [Huge Seaforium Bombs]
@@ -1451,7 +1471,7 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
   
   -- 11.2
   -- Sparks
-  [231757] = {{2,PRI_OPEN},nil,nil}, -- Fractured Spark of Fortunes
+  [231757] = {{2,PRI_OPEN},nil,nil}, -- Fractured Spark of Starlight
   
   -- 11.2.5
   -- Legion Remix

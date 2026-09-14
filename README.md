@@ -17,6 +17,7 @@ Features:
  - Is possible remove permanently blacklisted item just one with /nop unlist itemID. ItemID come from query via /nop list.
  - Quest items. For each quest item in bags is added separate button. This part is taken from Quest Item Bar made by Nickenyfiken and ZidayaXis. I loved that add-on and original authors have no plans to maintain it. I did adopted core functionality from that add-on.
  - Auto-accept and auto-turnin quests from new Quest Tracker.
+ - Integrates the item button with Blizzard Edit Mode, including per-layout positioning.
 
 Supported items: 
 
@@ -28,6 +29,8 @@ Supported items:
 Let me know item names to add to wish list. I will grow list as I find items suitable to add. Please I need people who will send me translations for nop-locale-enUS.lua to other languages. Localized SubZones are in for deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN and zhTW.
 
 Original idea behind this add-on come from Driizt@BB_EU who did make single button for all items containing description "Use: Open ....", I did extend it into all usable items.
+
+Blizzard Edit Mode integration uses the EditModeExpanded-1.0 library by Teelo, included with permission under the library's distribution terms.
 
 
 Known issues: 

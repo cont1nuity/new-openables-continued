@@ -1452,6 +1452,46 @@ NOP.T_ITEMS = { -- [itemID] = {{count_to_use,priority},{"sub-Zone",...},{[mapID]
   -- 11.2
   -- Sparks
   [231757] = {{2,PRI_OPEN},nil,nil}, -- Fractured Spark of Fortunes
-  --[] = {{1,PRI_OPEN},nil,nil}, -- 
   
+  -- 11.2.5
+  -- Legion Remix
+  [254267] = {{100,PRI_OPEN},nil,nil}, -- Fragmented Memento of Epoch Challenges
+  [245925] = {{1, PRI_OPEN},nil,nil},  --  Artifactium Sand
+  [248141] = {{1, PRI_OPEN},nil,nil},  --  Curious Simulacrum
+  [249781] = {{1, PRI_OPEN},nil,nil},  --  Wardens Champions Insignia
+  [249782] = {{1, PRI_OPEN},nil,nil},  --  Valarjar Champions Insignia
+  [249783] = {{1, PRI_OPEN},nil,nil},  --  Nightfallen Champions Insignia
+  [249784] = {{1, PRI_OPEN},nil,nil},  --  Legionfall Champions Insignia
+  [249785] = {{1, PRI_OPEN},nil,nil},  --  Highmountain Tribe Champions Insignia
+  [249786] = {{1, PRI_OPEN},nil,nil},  --  Dreamweaver Champions Insignia
+  [249787] = {{1, PRI_OPEN},nil,nil},  --  Court of Farondis Champions Insignia
+  [249788] = {{1, PRI_OPEN},nil,nil},  --  Argussian Reach Champions Insignia
+  [249891] = {{1, PRI_OPEN},nil,nil},  --  Mound of Artifactium Sand
+  [252364] = {{10, PRI_OPEN},nil,nil}, --   Gem of Guldan
+  [253222] = {{10, PRI_OPEN},nil,nil}, --   Corrupted Thorn of The Dream
+  [253223] = {{10, PRI_OPEN},nil,nil}, --   Fractal Felshard
+  [253224] = {{10, PRI_OPEN},nil,nil}, --   Mote of A Broken Time
+  [253227] = {{10, PRI_OPEN},nil,nil}, --   Flawless Thread of Time
+  [253756] = {{1, PRI_OPEN},nil,nil},  --  Insignia of The Broken Isles
+  [254579] = {{1, PRI_OPEN},nil,nil},  --  Epoch Resonance
+  [246937] = {{1,PRI_OPEN},nil,nil}, -- Perfected Epoch Memento
+  
+  --These Mementos are automatically consumed when looted... usually
+  [242516] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Legends
+  [242508] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Potential
+  [242502] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch History
+  [242503] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Stories
+  [242507] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Power
+  [242506] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Rituals
+  [242501] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Knowledge
+  [242505] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Hope
+  [242504] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Truth
+  [242511] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Nostalgia
+  [242514] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Fun
+  [242515] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Strategies
+  [242510] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Kindness
+  [242509] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Curiosity
+  [242512] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Creatures
+  [242513] = {{1,PRI_OPEN},nil,nil}, -- Memento of Epoch Collections
+  --[] = {{1,PRI_OPEN},nil,nil}, -- 
 }

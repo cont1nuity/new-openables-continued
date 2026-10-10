@@ -1,9 +1,7 @@
 ## Interface: 120100, 120105, 16001
 ## Title: New |cffffff88Openables|r
 ## Author: cont1nuity (previous maintainers/creators: srhinos, PeknaMrcha alias EduardCurse alias Edik)
-#@version-retail@
 ## Version: @project-version@
-#@end-version-retail@
 ## Notes: Popup Button and keybind for opening or using items in your bags. Continued version of the original NOP to support Dragonflight.
 ## SavedVariables: NewOpenablesProfile
 ## OptionalDeps: Masque, WagoAnalytics, EditModeExpanded

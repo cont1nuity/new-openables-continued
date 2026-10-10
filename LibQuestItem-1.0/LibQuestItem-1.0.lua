@@ -1,4 +1,4 @@
-local MAJOR, MINOR = "LibQuestItem-1.0", tonumber("30") or 999 -- ES increased version to take over all older instances
+local MAJOR, MINOR = "LibQuestItem-1.0", tonumber("31") or 999 -- ES increased version to take over all older instances
 local LibQuestItem = LibStub:NewLibrary(MAJOR, MINOR)
 
 if not LibQuestItem then return end -- no need to update
@@ -18,8 +18,10 @@ local tonumber	= _G.tonumber
 local tostring	= _G.tostring
 
 local GetContaineritemId = _G.GetContaineritemId or _G.C_Item.GetContaineritemId
-local GetContainerNumSlots = _G.GetContainerNumSlots or _G.C_Item.GetContainerNumSlots
-local GetInventoryitemId = _G.GetInventoryitemId or _G.C_Item.GetInventoryitemId
+local GetContainerNumSlots = _G.GetContainerNumSlots or _G.C_Item.GetContainerNumSlots or _G.C_Container.GetContainerNumSlots
+local GetContainerItemID = _G.GetContainerItemID or _G.C_Container.GetContainerItemID
+local GetContainerItemQuestInfo = _G.GetContainerItemQuestInfo or _G.C_Container.GetContainerItemQuestInfo
+--local GetInventoryitemId = _G.GetInventoryitemId or _G.C_Item.GetInventoryitemId
 local GetInventorySlotInfo = _G.GetInventorySlotInfo or _G.GetInventorySlotInfo
 local GetItemInfo = _G.GetItemInfo or _G.C_Item.GetItemInfo
 local GetItemSpell = _G.GetItemSpell or _G.C_Item.GetItemSpell

@@ -1,11 +1,6 @@
 -- HereBeDragons is a data API for the World of Warcraft mapping system
 
--- HereBeDragons-2.0 is not supported on WoW 7.x or earlier
-if select(4, GetBuildInfo()) < 80000 then
-    return
-end
-
-local MAJOR, MINOR = "HereBeDragons-2.0", 6
+local MAJOR, MINOR = "HereBeDragons-2.0", 33
 assert(LibStub, MAJOR .. " requires LibStub")
 
 local HereBeDragons, oldversion = LibStub:NewLibrary(MAJOR, MINOR)
@@ -18,7 +13,14 @@ HereBeDragons.eventFrame       = HereBeDragons.eventFrame or CreateFrame("Frame"
 HereBeDragons.mapData          = HereBeDragons.mapData or {}
 HereBeDragons.worldMapData     = HereBeDragons.worldMapData or {}
 HereBeDragons.transforms       = HereBeDragons.transforms or {}
+HereBeDragons.instanceZones    = HereBeDragons.instanceZones or {}
 HereBeDragons.callbacks        = HereBeDragons.callbacks or CBH:New(HereBeDragons, nil, nil, false)
+
+local WoWClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+local WoWBC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
+local WoWWrath = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC)
+local WoWCata = (WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC)
+local WoWMists = (WOW_PROJECT_ID == WOW_PROJECT_MISTS_CLASSIC)
 
 -- Data Constants
 local COSMIC_MAP_ID = 946
@@ -28,8 +30,6 @@ local WORLD_MAP_ID = 947
 local PI2 = math.pi * 2
 local atan2 = math.atan2
 local pairs, ipairs = pairs, ipairs
-local type = type
-local band = bit.band
 
 -- WoW API upvalues
 local UnitPosition = UnitPosition
@@ -39,6 +39,7 @@ local C_Map = C_Map
 local mapData          = HereBeDragons.mapData -- table { width, height, left, top, .instance, .name, .mapType }
 local worldMapData     = HereBeDragons.worldMapData -- table { width, height, left, top }
 local transforms       = HereBeDragons.transforms
+local instanceZones    = HereBeDragons.instanceZones
 
 local currentPlayerUIMapID, currentPlayerUIMapType
 
@@ -63,33 +64,65 @@ local instanceIDOverrides = {
     -- Legion
     [1478] = 1220, -- Temple of Elune Scenario (Val'Sharah)
     [1495] = 1220, -- Protection Paladin Artifact Scenario (Stormheim)
-    [1498] = 1220, -- Havoc Demon Hunter Artifact Scenario (Suramar)
     [1502] = 1220, -- Dalaran Underbelly
     [1533] = 0,    -- Karazhan Artifact Scenario
+    [1539] = 0,    -- Arm Warrior Artifact Tirisfal Scenario
     [1612] = 1220, -- Feral Druid Artifact Scenario (Suramar)
     [1626] = 1220, -- Suramar Withered Scenario
     [1662] = 1220, -- Suramar Invasion Scenario
+    -- BfA
+    [2213] = 0,    -- Horrific Vision of Stormwind
+    [2241] = 1,    -- Uldum N'zoth assault
+    [2274] = 1,    -- Uldum N'zoth Minor Vision
+    [2275] = 870,  -- Vale of Eternal Blossoms N'zoth Minor Vision
 }
 
+local dynamicInstanceIDOverrides = {}
+instanceIDOverrides = setmetatable(instanceIDOverrides, { __index = dynamicInstanceIDOverrides })
+
+local function overrideInstance(instance) return instanceIDOverrides[instance] or instance end
+
+-- debug only
+HereBeDragons.___DIIDO = dynamicInstanceIDOverrides
+
 -- gather map info, but only if this isn't an upgrade (or the upgrade version forces a re-map)
-if not oldversion or oldversion < 3 then
+if not oldversion or oldversion < 32 then
     -- wipe old data, if required, otherwise the upgrade path isn't triggered
     if oldversion then
         wipe(mapData)
         wipe(worldMapData)
         wipe(transforms)
+        wipe(instanceZones)
     end
 
     -- map transform data extracted from UIMapAssignment.db2 (see HereBeDragons-Scripts on GitHub)
     -- format: instanceID, newInstanceID, minY, maxY, minX, maxX, offsetY, offsetX
-    local transformData = {
-        { 530, 0, 4800, 16000, -10133.3, -2666.67, -2400, 2400 },
-        { 530, 1, -6933.33, 533.33, -16000, -8000, 10133.3, 17600 },
-        { 732, 0, -3200, 533.3, -533.3, 2666.7, -611.8, 3904.3 },
-        { 1064, 870, 5391, 8148, 3518, 7655, -2134.2, -2286.6 },
-        { 1208, 1116, -2666, -2133, -2133, -1600, 10210, 2410 },
-        { 1460, 1220, -1066.7, 2133.3, 0, 3200, -2333.9, 966.7 },
-    }
+    local transformData
+    if WoWClassic then
+        transformData = {}
+    elseif WoWBC or WoWWrath or WoWCata then
+        transformData = {
+            { 530, 0, 4800, 16000, -10133.3, -2666.67, -2400, 2662.8 },
+            { 530, 1, -6933.33, 533.33, -16000, -8000, 10339.7, 17600 },
+        }
+    elseif WoWMists then
+        transformData = {
+            { 530, 1, -6933.33, 533.33, -16000, -8000, 10339.7, 17600 },
+            { 530, 0, 4800, 16000, -10133.3, -2666.67, -2400, 2662.8 },
+            { 1014, 870, 3200, 5333.3, 1066.7, 2666.7, 0, 0 },
+        }
+    else
+        transformData = {
+            { 530, 0, 4800, 16000, -10133.3, -2666.67, -2400, 2400 },
+            { 530, 1, -6933.33, 533.33, -16000, -8000, 9916, 17600 },
+            { 1014, 870, 3200, 5333.3, 1066.7, 2666.7, 0, 0 },
+            { 1208, 1116, -2666, -2133, -2133, -1600, 10210.7, 2411.4 },
+            { 1460, 1220, -1066.7, 2133.3, 0, 3200, -2333.9, 966.7 },
+            { 1498, 1220, -533.3, 2133.3, 3733.3, 5866.7, 0, 0 },
+            { 1545, 1220, -2666.7, 0, 4800, 8000, 0, -0 },
+            { 1599, 1, 4800, 5866.7, -4266.7, -3200, -490.6, -0.4 },
+        }
+    end
 
     local function processTransforms()
         for _, transform in pairs(transformData) do
@@ -103,13 +136,13 @@ if not oldversion or oldversion < 3 then
 
     local function applyMapTransforms(instanceID, left, right, top, bottom)
         if transforms[instanceID] then
-            for _, transformData in ipairs(transforms[instanceID]) do
-                if left <= transformData.maxX and right >= transformData.minX and top <= transformData.maxY and bottom >= transformData.minY then
-                    instanceID = transformData.newInstanceID
-                    left   = left   + transformData.offsetX
-                    right  = right  + transformData.offsetX
-                    top    = top    + transformData.offsetY
-                    bottom = bottom + transformData.offsetY
+            for _, data in ipairs(transforms[instanceID]) do
+                if left <= data.maxX and right >= data.minX and top <= data.maxY and bottom >= data.minY then
+                    instanceID = data.newInstanceID
+                    left   = left   + data.offsetX
+                    right  = right  + data.offsetX
+                    top    = top    + data.offsetY
+                    bottom = bottom + data.offsetY
                     break
                 end
             end
@@ -119,33 +152,88 @@ if not oldversion or oldversion < 3 then
 
     local vector00, vector05 = CreateVector2D(0, 0), CreateVector2D(0.5, 0.5)
     -- gather the data of one map (by uiMapID)
-    local function processMap(id, data)
+    local function processMap(id, data, parent)
         if not id or mapData[id] then return end
 
+        if not data then
+            data = C_Map.GetMapInfo(id)
+            if not data then return end
+        end
+
+        if data.parentMapID and data.parentMapID ~= 0 then
+            parent = data.parentMapID
+        elseif not parent then
+            parent = 0
+        end
+
         -- get two positions from the map, we use 0/0 and 0.5/0.5 to avoid issues on some maps where 1/1 is translated inaccurately
-        local instance, topLeft = C_Map.GetWorldPosFromMapPos(id, vector00)
-        local _, bottomRight = C_Map.GetWorldPosFromMapPos(id, vector05)
-        if topLeft and bottomRight then
-            local top, left = topLeft:GetXY()
-            local bottom, right = bottomRight:GetXY()
-            bottom = top + (bottom - top) * 2
-            right = left + (right - left) * 2
+        local instance, center = C_Map.GetWorldPosFromMapPos(id, vector05)
+        local width, height
+        if C_Map.GetMapWorldSize then
+            width, height = C_Map.GetMapWorldSize(id)
+        else
+            -- compat for classic... why does that not have GetMapWorldSize?
+            local _, topleft = C_Map.GetWorldPosFromMapPos(id, vector00)
+            if center and topleft then
+                local top, left = topleft:GetXY()
+                local bottom, right = center:GetXY()
+                width = (left - right) * 2
+                height = (top - bottom) * 2
+            end
+        end
+        if center and width and height then
+           local top, left = center:GetXY()
+           top = top + (height / 2)
+           local bottom = top - height
+           left = left + (width / 2)
+           local right = left - width
 
             instance, left, right, top, bottom = applyMapTransforms(instance, left, right, top, bottom)
-            mapData[id] = {left - right, top - bottom, left, top, instance = instance, name = data.name, mapType = data.mapType, parent = data.parentMapID}
+            mapData[id] = {left - right, top - bottom, left, top, instance = instance, name = data.name, mapType = data.mapType, parent = parent }
         else
-            mapData[id] = {0, 0, 0, 0, instance = instance or -1, name = data.name, mapType = data.mapType, parent = data.parentMapID }
+            mapData[id] = {0, 0, 0, 0, instance = instance or -1, name = data.name, mapType = data.mapType, parent = parent }
+        end
+
+        -- check for zones that are a different instance as their parent continent
+        if data.mapType == Enum.UIMapType.Zone and mapData[parent] and mapData[parent].mapType == Enum.UIMapType.Continent and instance >= 0 and mapData[parent].instance >= 0 and instance ~= mapData[parent].instance then
+            local minX, maxX, minY, maxY = C_Map.GetMapRectOnMap(id, parent)
+            if minX and maxX and minY and maxY and maxX > 0 and maxY > 0 then
+                mapData[id].rectOnParent = { minX = minX, maxX = maxX, minY = minY, maxY = maxY, parentInstance = mapData[parent].instance }
+                if not instanceZones[instance] then
+                    instanceZones[instance] = {}
+                end
+                if not instanceZones[instance][mapData[parent].instance] then
+                    instanceZones[instance][mapData[parent].instance] = {}
+                end
+                table.insert(instanceZones[instance][mapData[parent].instance], id)
+            end
         end
     end
 
-    local function processMapChildrenRecursive(id)
-        local children = C_Map.GetMapChildrenInfo(id)
+    local function processMapChildrenRecursive(parent)
+        local children = C_Map.GetMapChildrenInfo(parent)
         if children and #children > 0 then
             for i = 1, #children do
                 local id = children[i].mapID
                 if id and not mapData[id] then
-                    processMap(id, children[i])
+                    processMap(id, children[i], parent)
                     processMapChildrenRecursive(id)
+
+                    -- process sibling maps (in the same group)
+                    -- in some cases these are not discovered by GetMapChildrenInfo above
+                    local groupID = C_Map.GetMapGroupID(id)
+                    if groupID then
+                        local groupMembers = C_Map.GetMapGroupMembersInfo(groupID)
+                        if groupMembers then
+                            for k = 1, #groupMembers do
+                                local memberId = groupMembers[k].mapID
+                                if memberId and not mapData[memberId] then
+                                    processMap(memberId, nil, parent)
+                                    processMapChildrenRecursive(memberId)
+                                end
+                            end
+                        end
+                    end
                 end
             end
         end
@@ -153,27 +241,69 @@ if not oldversion or oldversion < 3 then
 
     local function fixupZones()
         local cosmic = C_Map.GetMapInfo(COSMIC_MAP_ID)
-        mapData[COSMIC_MAP_ID] = {0, 0, 0, 0}
-        mapData[COSMIC_MAP_ID].instance = -1
-        mapData[COSMIC_MAP_ID].name = cosmic.name
-        mapData[COSMIC_MAP_ID].mapType = cosmic.mapType
+        if cosmic then
+            mapData[COSMIC_MAP_ID] = {0, 0, 0, 0}
+            mapData[COSMIC_MAP_ID].instance = -1
+            mapData[COSMIC_MAP_ID].name = cosmic.name
+            mapData[COSMIC_MAP_ID].mapType = cosmic.mapType
+        end
 
         -- data for the azeroth world map
-        worldMapData[0] = { 76153.14, 50748.62, 65008.24, 23827.51 }
-        worldMapData[1] = { 77803.77, 51854.98, 13157.6, 28030.61 }
-        worldMapData[571] = { 71773.64, 50054.05, 36205.94, 12366.81 }
-        worldMapData[870] = { 67710.54, 45118.08, 33565.89, 38020.67 }
-        worldMapData[1220] = { 82758.64, 55151.28, 52943.46, 24484.72 }
-        worldMapData[1642] = { 77933.3, 51988.91, 44262.36, 32835.1 }
-        worldMapData[1643] = { 76060.47, 50696.96, 55384.8, 25774.35 }
+        if WoWClassic then
+            worldMapData[0] = { 44688.53, 29795.11, 32601.04,  9894.93 }
+            worldMapData[1] = { 44878.66, 29916.10,  8723.96, 14824.53 }
+        elseif WoWBC then
+            worldMapData[0] = { 44688.53, 29791.24, 32681.47, 11479.44 }
+            worldMapData[1] = { 44878.66, 29916.10,  8723.96, 14824.53 }
+        elseif WoWWrath then
+            worldMapData[0] = { 48033.24, 32020.8, 36867.97, 14848.84 }
+            worldMapData[1] = { 47908.72, 31935.28, 8552.61, 18467.83 }
+            worldMapData[571] = { 47662.7, 31772.19, 25198.53, 11072.07 }
+        elseif WoWCata then
+            worldMapData[0] = { 48033.24, 32020.8, 36867.97, 14848.84 }
+            worldMapData[1] = { 47908.72, 31935.28, 8552.61, 18467.83 }
+            worldMapData[571] = { 47662.7, 31772.19, 25198.53, 11072.07 }
+        elseif WoWMists then
+            worldMapData[0] = { 57114.85, 38082.53, 46284.08, 15795.1 }
+            worldMapData[1] = { 58984.3, 39319.22, 10153.84, 19536.12 }
+            worldMapData[571] = { 56338.03, 37567.89, 29892.96, 11496.56 }
+            worldMapData[870] = { 53103.22, 35408.03, 28648.8, 30726.23 }
+        else
+            worldMapData[0] = { 76153.14, 50748.62, 65008.24, 23827.51 }
+            worldMapData[1] = { 77621.12, 51854.98, 12444.4, 28030.61 }
+            worldMapData[571] = { 71773.64, 50054.05, 36205.94, 12366.81 }
+            worldMapData[870] = { 67710.54, 45118.08, 33565.89, 38020.67 }
+            worldMapData[1220] = { 82758.64, 55151.28, 52943.46, 24484.72 }
+            worldMapData[1642] = { 77933.3, 51988.91, 44262.36, 32835.1 }
+            worldMapData[1643] = { 76060.47, 50696.96, 55384.8, 25774.35 }
+            worldMapData[2444] = { 111420.37, 74283, 86088.21, 15682.4 }
+            worldMapData[2552] = { 82171.44, 54787.67, 21219.3, 47876.05 }
+            worldMapData[2601] = { 67929.29, 49267.42, 18325.63, 42233.06 }
+        end
     end
 
     local function gatherMapData()
         processTransforms()
 
-        processMapChildrenRecursive(COSMIC_MAP_ID)
+        -- find all maps in well known structures
+        if WoWClassic then
+            processMap(WORLD_MAP_ID)
+            processMapChildrenRecursive(WORLD_MAP_ID)
+        else
+            processMapChildrenRecursive(COSMIC_MAP_ID)
+        end
 
         fixupZones()
+
+        -- try to fill in holes in the map list
+        for i = 1, 3000 do
+            if not mapData[i] then
+                local mapInfo = C_Map.GetMapInfo(i)
+                if mapInfo and mapInfo.name then
+                    processMap(i, mapInfo, nil)
+                end
+            end
+        end
     end
 
     gatherMapData()
@@ -191,20 +321,27 @@ local function applyCoordinateTransforms(x, y, instanceID)
             end
         end
     end
-    if instanceIDOverrides[instanceID] then
-        instanceID = instanceIDOverrides[instanceID]
-    end
-    return x, y, instanceID
+    return x, y, overrideInstance(instanceID)
 end
 
 local StartUpdateTimer
-local function UpdateCurrentPosition()
+local function UpdateCurrentPosition(instanceCheck)
     -- retrieve current zone
     local uiMapID = C_Map.GetBestMapForUnit("player")
 
+    -- try to override the instance if possible
+    if instanceCheck then
+        local _x, _y, instance = HereBeDragons:GetPlayerWorldPosition()
+        if instance and instance ~= -1 and mapData[uiMapID] and mapData[uiMapID].instance ~= instance and uiMapID ~= -1 and not instanceIDOverrides[instance] and not instanceIDOverrides[mapData[uiMapID].instance] then
+            dynamicInstanceIDOverrides[instance] = mapData[uiMapID].instance
+        end
+    end
+
     if uiMapID ~= currentPlayerUIMapID then
-        -- update upvalues and signal callback
+        -- update location upvalues
         currentPlayerUIMapID, currentPlayerUIMapType = uiMapID, mapData[uiMapID] and mapData[uiMapID].mapType or 0
+
+        -- signal callback
         HereBeDragons.callbacks:Fire("PlayerZoneChanged", currentPlayerUIMapID, currentPlayerUIMapType)
     end
 
@@ -235,7 +372,17 @@ function StartUpdateTimer()
 end
 
 local function OnEvent(frame, event, ...)
-    UpdateCurrentPosition()
+    local instanceCheck = false
+    if event == "ZONE_CHANGED_NEW_AREA" then
+        instanceCheck = true
+    elseif event == "PLAYER_ENTERING_WORLD" then
+        local initial, reload = ...
+        instanceCheck = (initial or reload)
+    end
+    UpdateCurrentPosition(instanceCheck)
+
+    -- try to work around missing zone changes where the event fires before the zone updates
+    StartUpdateTimer()
 end
 
 HereBeDragons.eventFrame:SetScript("OnEvent", OnEvent)
@@ -245,11 +392,6 @@ HereBeDragons.eventFrame:RegisterEvent("ZONE_CHANGED")
 HereBeDragons.eventFrame:RegisterEvent("ZONE_CHANGED_INDOORS")
 HereBeDragons.eventFrame:RegisterEvent("NEW_WMO_CHUNK")
 HereBeDragons.eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
-
--- if we're loading after entering the world (ie. on demand), update position now
-if IsLoggedIn() then
-    UpdateCurrentPosition()
-end
 
 --- Return the localized zone name for a given uiMapID
 -- @param uiMapID uiMapID of the zone
@@ -289,7 +431,7 @@ function HereBeDragons:GetWorldCoordinatesFromZone(x, y, zone)
     local width, height, left, top = data[1], data[2], data[3], data[4]
     x, y = left - width * x, top - height * y
 
-    return x, y, data.instance
+    return x, y, overrideInstance(data.instance)
 end
 
 --- Convert local/point coordinates to world coordinates in yards. The coordinates have to come from the Azeroth World Map
@@ -307,16 +449,54 @@ function HereBeDragons:GetWorldCoordinatesFromAzerothWorldMap(x, y, instance)
     return x, y, instance
 end
 
-
 --- Convert world coordinates to local/point zone coordinates
 -- @param x Global X position
 -- @param y Global Y position
--- @param zone uiMapID of the zone
+-- @param zone uiMapID of the target zone
 -- @param allowOutOfBounds Allow coordinates to go beyond the current map (ie. outside of the 0-1 range), otherwise nil will be returned
+-- @deprecated Use GetZoneCoordinatesFromWorldInstance instead
 function HereBeDragons:GetZoneCoordinatesFromWorld(x, y, zone, allowOutOfBounds)
     local data = mapData[zone]
     if not data or data[1] == 0 or data[2] == 0 then return nil, nil end
     if not x or not y then return nil, nil end
+
+    return self:GetZoneCoordinatesFromWorldInstance(x, y, data.instance, zone, allowOutOfBounds)
+end
+
+local function TranslateInstanceZone(self, zoneList, x, y)
+    for _, id in pairs(zoneList) do
+        local x1, y1 = self:GetZoneCoordinatesFromWorldInstance(x, y, mapData[id].instance, id)
+        if x1 and y1 then
+            x1, y1 = Lerp(mapData[id].rectOnParent.minX, mapData[id].rectOnParent.maxX, x1), Lerp(mapData[id].rectOnParent.minY, mapData[id].rectOnParent.maxY, y1)
+            return self:GetWorldCoordinatesFromZone(x1, y1, mapData[id].parent)
+        end
+    end
+end
+
+--- Convert world coordinates to local/point zone coordinates
+-- @param x Global X position
+-- @param y Global Y position
+-- @param instance World instance of the X/Y coordinates
+-- @param zone uiMapID of the target zone
+-- @param allowOutOfBounds Allow coordinates to go beyond the current map (ie. outside of the 0-1 range), otherwise nil will be returned
+function HereBeDragons:GetZoneCoordinatesFromWorldInstance(x, y, instance, zone, allowOutOfBounds)
+    if zone == WORLD_MAP_ID then -- we can support this, so we should, even if the dedicated API exists
+        return self:GetAzerothWorldMapCoordinatesFromWorld(x, y, instance, allowOutOfBounds)
+    end
+
+    local data = mapData[zone]
+    if not data or data[1] == 0 or data[2] == 0 then return nil, nil end
+    if not x or not y then return nil, nil end
+
+    local targetInstance = data.instance
+    if targetInstance ~= instance then
+        if instanceZones[instance] and instanceZones[instance][targetInstance] then
+            x, y, instance = TranslateInstanceZone(self, instanceZones[instance][targetInstance], x, y)
+        end
+        if targetInstance ~= instance then
+            return nil, nil
+        end
+    end
 
     local width, height, left, top = data[1], data[2], data[3], data[4]
     x, y = (left - x) / width, (top - y) / height
@@ -333,6 +513,16 @@ end
 -- @param instance Instance to translate coordinates from
 -- @param allowOutOfBounds Allow coordinates to go beyond the current map (ie. outside of the 0-1 range), otherwise nil will be returned
 function HereBeDragons:GetAzerothWorldMapCoordinatesFromWorld(x, y, instance, allowOutOfBounds)
+    -- try to translate an instanced zone to a supported instance
+    if not worldMapData[instance] and instanceZones[instance] then
+        for k, zoneList in pairs(instanceZones[instance]) do
+            if worldMapData[k] then
+                x, y, instance = TranslateInstanceZone(self, zoneList, x, y)
+                break
+            end
+        end
+    end
+
     local data = worldMapData[instance]
     if not data or data[1] == 0 or data[2] == 0 then return nil, nil end
     if not x or not y then return nil, nil end
@@ -350,15 +540,12 @@ end
 local function TranslateAzerothWorldMapCoordinates(self, x, y, oZone, dZone, allowOutOfBounds)
     if (oZone ~= WORLD_MAP_ID and not mapData[oZone]) or (dZone ~= WORLD_MAP_ID and not mapData[dZone]) then return nil, nil end
     -- determine the instance we're working with
-    local instance = (oZone == WORLD_MAP_ID) and mapData[dZone].instance or mapData[oZone].instance
+    local instance = overrideInstance((oZone == WORLD_MAP_ID) and mapData[dZone].instance or mapData[oZone].instance)
     if not worldMapData[instance] then return nil, nil end
-
-    local data = worldMapData[instance]
-    local width, height, left, top = data[1], data[2], data[3], data[4]
 
     if oZone == WORLD_MAP_ID then
         x, y = self:GetWorldCoordinatesFromAzerothWorldMap(x, y, instance)
-        return self:GetZoneCoordinatesFromWorld(x, y, dZone, allowOutOfBounds)
+        return self:GetZoneCoordinatesFromWorldInstance(x, y, instance, dZone, allowOutOfBounds)
     else
         x, y = self:GetWorldCoordinatesFromZone(x, y, oZone)
         return self:GetAzerothWorldMapCoordinatesFromWorld(x, y, instance, allowOutOfBounds)
@@ -378,13 +565,16 @@ function HereBeDragons:TranslateZoneCoordinates(x, y, oZone, dZone, allowOutOfBo
         return TranslateAzerothWorldMapCoordinates(self, x, y, oZone, dZone, allowOutOfBounds)
     end
 
+    local data = mapData[dZone]
+    local data_origin = mapData[oZone]
+    if not data or not data_origin then return nil, nil end
+
+    -- todo: short circuit some translation here for instanceZones
+
     local xCoord, yCoord, instance = self:GetWorldCoordinatesFromZone(x, y, oZone)
     if not xCoord then return nil, nil end
 
-    local data = mapData[dZone]
-    if not data or data.instance ~= instance then return nil, nil end
-
-    return self:GetZoneCoordinatesFromWorld(xCoord, yCoord, dZone, allowOutOfBounds)
+    return self:GetZoneCoordinatesFromWorldInstance(xCoord, yCoord, instance, dZone, allowOutOfBounds)
 end
 
 --- Return the distance from an origin position to a destination position in the same instance/continent.
@@ -409,11 +599,12 @@ end
 -- @param dY destination Y, in local zone/point coordinates
 -- @return distance, deltaX, deltaY in yards
 function HereBeDragons:GetZoneDistance(oZone, oX, oY, dZone, dX, dY)
-    local oX, oY, oInstance = self:GetWorldCoordinatesFromZone(oX, oY, oZone)
+    local oInstance, dInstance
+    oX, oY, oInstance = self:GetWorldCoordinatesFromZone(oX, oY, oZone)
     if not oX then return nil, nil, nil end
 
     -- translate dX, dY to the origin zone
-    local dX, dY, dInstance = self:GetWorldCoordinatesFromZone(dX, dY, dZone)
+    dX, dY, dInstance = self:GetWorldCoordinatesFromZone(dX, dY, dZone)
     if not dX then return nil, nil, nil end
 
     if oInstance ~= dInstance then return nil, nil, nil end
@@ -453,8 +644,8 @@ end
 -- @return x, y, instanceID
 function HereBeDragons:GetUnitWorldPosition(unitId)
     -- get the current position
-    local y, x, z, instanceID = UnitPosition(unitId)
-    if not x or not y then return nil, nil, instanceIDOverrides[instanceID] or instanceID end
+    local y, x, _z, instanceID = UnitPosition(unitId)
+    if not x or not y then return nil, nil, overrideInstance(instanceID) end
 
     -- return transformed coordinates
     return applyCoordinateTransforms(x, y, instanceID)
@@ -465,8 +656,8 @@ end
 -- @return x, y, instanceID
 function HereBeDragons:GetPlayerWorldPosition()
     -- get the current position
-    local y, x, z, instanceID = UnitPosition("player")
-    if not x or not y then return nil, nil, instanceIDOverrides[instanceID] or instanceID end
+    local y, x, _z, instanceID = UnitPosition("player")
+    if not x or not y then return nil, nil, overrideInstance(instanceID) end
 
     -- return transformed coordinates
     return applyCoordinateTransforms(x, y, instanceID)
@@ -488,9 +679,15 @@ function HereBeDragons:GetPlayerZonePosition(allowOutOfBounds)
     local x, y, instanceID = self:GetPlayerWorldPosition()
     if not x or not y then return nil, nil, nil, nil end
 
-    x, y = self:GetZoneCoordinatesFromWorld(x, y, currentPlayerUIMapID, allowOutOfBounds)
+    x, y = self:GetZoneCoordinatesFromWorldInstance(x, y, instanceID, currentPlayerUIMapID, allowOutOfBounds)
     if x and y then
         return x, y, currentPlayerUIMapID, currentPlayerUIMapType
     end
     return nil, nil, nil, nil
+end
+
+-- if we're loading after entering the world (ie. on demand), update position now
+-- This needs to remain at the bottom of the library to ensure all functions are loaded before they are needed
+if IsLoggedIn() then
+    UpdateCurrentPosition(true)
 end

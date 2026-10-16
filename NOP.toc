@@ -1,4 +1,4 @@
-## Interface: 120105, 16001
+## Interface: 120105, 120107, 16001
 ## Title: New |cffffff88Openables|r
 ## Author: cont1nuity (previous maintainers/creators: srhinos, PeknaMrcha alias EduardCurse alias Edik)
 ## Version: @project-version@
